@@ -103,7 +103,7 @@ export default function App() {
     <main className="app">
       <header className="head">
         <div>
-          <p className="eyebrow">HACKATÓN INTEGRAR · PABELLÓN 3</p>
+          <p className="eyebrow">HACKATÓN INTEGRAR</p>
           <h1>Libro de Quejas Espectral</h1>
         </div>
         <div className="keybox">
