@@ -1,94 +1,168 @@
-import { useReducer, useRef, useState } from 'react'
+import { useEffect, useReducer, useRef, useState } from 'react'
+import type { FormEvent } from 'react'
 import { consultGhost } from '../features/spirit-oracle/oracleService'
 import { OuijaBoard } from '../features/ouija-board/components/OuijaBoard'
-import { usePlanchetteAnimation } from '../features/ouija-board/hooks/usePlanchetteAnimation'
+import { GOODBYE, REST, usePlanchetteSimulation } from '../features/ouija-board/hooks/usePlanchetteSimulation'
 
-type State = 'IDLE' | 'SUMMONING' | 'SPELLING' | 'EXORCISED'
-type Action = { type: 'SUBMIT' } | { type: 'ANSWER' } | { type: 'DONE' } | { type: 'EXORCISE' } | { type: 'RESET' }
+type State = 'IDLE' | 'WRITING' | 'SUMMONING' | 'MANIFESTING' | 'EXORCISED'
+type Action = { type: 'SUBMIT' } | { type: 'SUMMON' } | { type: 'MANIFEST' } | { type: 'DONE' } | { type: 'EXORCISE' } | { type: 'RESET' }
 
 function reducer(state: State, action: Action): State {
+  if (action.type === 'EXORCISE') return 'EXORCISED'
   switch (state) {
     case 'IDLE':
-      return action.type === 'SUBMIT' ? 'SUMMONING' : action.type === 'EXORCISE' ? 'EXORCISED' : state
+      return action.type === 'SUBMIT' ? 'WRITING' : state
+    case 'WRITING':
+      return action.type === 'SUMMON' ? 'SUMMONING' : state
     case 'SUMMONING':
-      return action.type === 'ANSWER' ? 'SPELLING' : action.type === 'EXORCISE' ? 'EXORCISED' : state
-    case 'SPELLING':
-      return action.type === 'DONE' ? 'IDLE' : action.type === 'EXORCISE' ? 'EXORCISED' : state
+      return action.type === 'MANIFEST' ? 'MANIFESTING' : state
+    case 'MANIFESTING':
+      return action.type === 'DONE' ? 'IDLE' : state
     case 'EXORCISED':
       return action.type === 'RESET' ? 'IDLE' : state
   }
 }
 
-const LABELS: Record<State, string> = {
-  IDLE: 'El espíritu espera tu queja...',
-  SUMMONING: 'Invocando al espíritu...',
-  SPELLING: 'El espíritu habla...',
-  EXORCISED: 'Fantasma exorcizado. Adiós.',
+const STATUS: Record<State, string> = {
+  IDLE: 'El fantasma espera tu reclamo.',
+  WRITING: 'Registrando el reclamo en el libro…',
+  SUMMONING: 'Consultando al más allá…',
+  MANIFESTING: 'El fantasma delibera su veredicto…',
+  EXORCISED: 'Sesión exorcizada.',
 }
+
+const D = 2000
+const MANIFEST_DELAY = 900
+const NBSP = ' '
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, 'IDLE')
   const [apiKey, setApiKey] = useState('')
   const [question, setQuestion] = useState('')
-  const exorcisedRef = useRef(false)
-  const anim = usePlanchetteAnimation(() => dispatch({ type: 'DONE' }))
+  const [humanMessage, setHumanMessage] = useState('')
+  const [ghostAnswer, setGhostAnswer] = useState('')
+  const turn = useRef(0)
+  const timers = useRef<number[]>([])
+  const sim = usePlanchetteSimulation()
 
-  const submit = async () => {
-    if (state !== 'IDLE' || !question.trim()) return
-    exorcisedRef.current = false
+  const clearTimers = () => {
+    timers.current.forEach((t) => window.clearTimeout(t))
+    timers.current = []
+  }
+  useEffect(() => clearTimers, [])
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault()
+    const text = question.trim()
+    if (state !== 'IDLE' || !text) return
+    const id = ++turn.current
+    const alive = () => turn.current === id
     dispatch({ type: 'SUBMIT' })
-    anim.reset()
-    const answer = await consultGhost(question, apiKey)
-    // Exorcism during SUMMONING: reducer ignores ANSWER, but we must not animate.
-    if (!exorcisedRef.current) {
-      dispatch({ type: 'ANSWER' })
-      anim.enqueueText(answer)
-    }
+    setQuestion('')
+    clearTimers()
+    timers.current.push(
+      window.setTimeout(() => {
+        if (!alive()) return
+        setHumanMessage(text)
+        dispatch({ type: 'SUMMON' })
+      }, D),
+      window.setTimeout(() => {
+        if (alive()) dispatch({ type: 'MANIFEST' })
+      }, D + MANIFEST_DELAY),
+    )
+    const oracle = consultGhost(text, apiKey).catch(() => 'Su queja fue archivada')
+    const [answer] = await Promise.all([oracle, sim.simulate(2 * D + MANIFEST_DELAY)])
+    if (!alive()) return
+    clearTimers()
+    setGhostAnswer(answer)
+    dispatch({ type: 'DONE' })
   }
 
   const exorcise = () => {
-    exorcisedRef.current = true
+    if (state === 'EXORCISED') return
+    turn.current++
+    clearTimers()
+    sim.cancel(GOODBYE)
+    setGhostAnswer('ADIÓS')
     dispatch({ type: 'EXORCISE' })
-    anim.flushToGoodbye()
   }
 
   const restart = () => {
-    exorcisedRef.current = false
-    anim.reset()
+    turn.current++
+    clearTimers()
+    sim.cancel(REST)
     setQuestion('')
+    setHumanMessage('')
+    setGhostAnswer('')
     dispatch({ type: 'RESET' })
   }
 
+  const busy = state !== 'IDLE'
+
   return (
     <main className="app">
-      <h1>Libro de Quejas Espectral</h1>
-      <input
-        className="key"
-        type="password"
-        placeholder="API Key de Gemini o Groq (opcional)"
-        value={apiKey}
-        onChange={(e) => setApiKey(e.target.value)}
-        autoComplete="off"
-      />
-      <OuijaBoard position={anim.position} activeChar={anim.activeChar} />
-      <p className="spelled">{anim.spelled || ' '}</p>
-      <p className="status">{LABELS[state]}</p>
-      <textarea
-        placeholder="Escribe tu reclamo (ej: ¿Dónde dejaste mis llaves?)"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        disabled={state !== 'IDLE'}
-        rows={3}
-      />
-      <div className="buttons">
-        <button onClick={submit} disabled={state !== 'IDLE' || !question.trim()}>
+      <header className="head">
+        <div>
+          <p className="eyebrow">HACKATÓN INTEGRAR · PABELLÓN 3</p>
+          <h1>Libro de Quejas Espectral</h1>
+        </div>
+        <div className="keybox">
+          <label htmlFor="apikey" className="key-label">Abrí el Inframundo con tu API Key</label>
+          <input
+            id="apikey"
+            type="password"
+            autoComplete="off"
+            placeholder="Clave de Gemini o Groq"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+          />
+          <p className="help">Dejala para conversar con el fantasma más cercano. Sin clave, atiende el de guardia.</p>
+        </div>
+      </header>
+
+      <section className="panel ghost" aria-live="polite">
+        <span className="panel-label">EL FANTASMA RESPONDE</span>
+        <p className="ghost-text">{ghostAnswer || NBSP}</p>
+      </section>
+
+      <OuijaBoard pose={sim.pose} animate={sim.animate} />
+
+      <p className="status">{STATUS[state]}</p>
+
+      <section className="panel human">
+        <span className="panel-label">TU RECLAMO</span>
+        <p className="human-text">{humanMessage || NBSP}</p>
+      </section>
+
+      <form className="form" onSubmit={submit}>
+        <div className="field">
+          <label htmlFor="claim">Escribí tu reclamo para el fantasma</label>
+          <input
+            id="claim"
+            type="text"
+            maxLength={140}
+            placeholder="¿Quién cortó el Wi-Fi anoche?"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            disabled={busy}
+          />
+        </div>
+        <button type="submit" className="primary" disabled={busy}>
           Invocar Respuesta
         </button>
-        <button className="danger" onClick={exorcise} disabled={state === 'EXORCISED'}>
+        <button type="button" className="danger" onClick={exorcise} disabled={state === 'EXORCISED'}>
           ¡EXORCIZAR!
         </button>
-        {state === 'EXORCISED' && <button onClick={restart}>Reiniciar sesión</button>}
-      </div>
+      </form>
+
+      {state === 'EXORCISED' && (
+        <div className="notice">
+          <p>El fantasma fue despedido. No se aceptan más reclamos en esta sesión.</p>
+          <button type="button" className="primary" onClick={restart}>
+            Reiniciar sesión
+          </button>
+        </div>
+      )}
     </main>
   )
 }

@@ -9,3 +9,10 @@ Route: delegated direct (writer trigger: 2+ non-trivial files).
 - [x] T3 ouija-board feature: board, coordinates.ts, usePlanchetteAnimation queue
 - [x] T4 App.tsx state machine (IDLE/SUMMONING/SPELLING/EXORCISED) + Exorcise button + API key input
 - [x] T5 `pnpm build` green, commit
+
+## Rework: final design (docs/diseno/README.md, main 876902e)
+Route: delegated direct (writer trigger). Branch rebased onto main.
+- [x] T6 Replace letter-spelling queue with `usePlanchetteSimulation` (simulate/cancel), drop coordinates.ts
+- [x] T7 5-state machine IDLE/WRITING/SUMMONING/MANIFESTING/EXORCISED with timed turn sequence + cancel on exorcise
+- [x] T8 Inline tablero.svg/plancheta.svg, fonts, colors, layout, texts, a11y per design doc
+- [x] T9 Facade keeps accents/Ñ; `pnpm build` green, commit

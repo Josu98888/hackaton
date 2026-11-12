@@ -2,14 +2,12 @@ import { AiOracleStrategy } from './strategies/AiOracleStrategy'
 import { LocalOracleStrategy } from './strategies/LocalOracleStrategy'
 import type { SpiritResponseStrategy } from './strategies/SpiritResponseStrategy'
 
-const MAX_LEN = 40
+const MAX_LEN = 60
 
 export function normalizeForBoard(text: string): string {
   return text
     .toUpperCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^A-Z0-9 ]/g, '')
+    .replace(/[^A-ZÁÉÍÓÚÜÑ0-9 ¿?¡!.,]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, MAX_LEN)

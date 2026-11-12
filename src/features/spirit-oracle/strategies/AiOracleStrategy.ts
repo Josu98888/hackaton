@@ -1,7 +1,7 @@
 import type { SpiritResponseStrategy } from './SpiritResponseStrategy'
 
 const SYSTEM_PROMPT =
-  'Eres el fantasma burocrata y sarcastico de una casa. Respondes quejas de clientes humanos en espanol, con sarcasmo, maximo 8 palabras, sin acentos, sin emojis.'
+  'Eres el fantasma burocrata y sarcástico de una casa. Respondes quejas de clientes humanos en español, con sarcasmo, maximo 8 palabras, usando acentos y la letra Ñ cuando corresponda, sin emojis.'
 
 export class AiOracleStrategy implements SpiritResponseStrategy {
   private apiKey: string

@@ -1,22 +1,22 @@
 import type { SpiritResponseStrategy } from './SpiritResponseStrategy'
 
 const RULES: Array<[string[], string]> = [
-  [['llave'], 'Las llaves? Pregunta a tu memoria'],
+  [['llave'], '¿Las llaves? Pregunta a tu memoria'],
   [['wifi', 'internet', 'router'], 'Reinicie su paciencia primero'],
   [['ruido', 'golpe', 'sonido', 'madrugada', '3 am'], 'Es mi horario laboral'],
-  [['comida', 'nevera', 'heladera', 'hambre'], 'No fui yo comi nada'],
+  [['comida', 'nevera', 'heladera', 'hambre'], 'No fui yo, no comí nada'],
   [['frio', 'helado'], 'Es ambiente, no queja'],
   [['luz', 'foco', 'lampara', 'apag'], 'Facture a otro fantasma'],
   [['puerta', 'portazo'], 'Corriente de aire, obvio'],
-  [['calor'], 'Soy fantasma no termostato'],
-  [['plata', 'dinero', 'factura', 'alquiler'], 'Sin cuerpo no pago nada'],
+  [['calor'], 'Soy fantasma, no termostato'],
+  [['plata', 'dinero', 'factura', 'alquiler'], 'Sin cuerpo, no pago nada'],
 ]
 
 const DEFAULTS = [
   'Su queja fue archivada',
   'Llame en horario de ultratumba',
   'No fui yo',
-  'Tramite en proceso por siglos',
+  'Trámite en proceso por siglos',
   'Complete el formulario 666',
 ]
 
