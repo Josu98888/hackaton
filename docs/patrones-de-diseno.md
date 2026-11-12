@@ -1,6 +1,6 @@
 # Patrones de Diseño – Ouija de Atención al Cliente
 
-Esta arquitectura combina una estructura **Feature-First** con cuatro patrones de diseño clásicos adaptados a React/TypeScript para mantener el código desacoplado, fácil de explicar y libre de condicionales gigantes.
+Esta arquitectura combina una estructura **Feature-First** con tres patrones de diseño clásicos (Strategy, State y Facade) y un custom hook de simulación, adaptados a React/TypeScript para mantener el código desacoplado, fácil de explicar y libre de condicionales gigantes.
 
 ---
 
@@ -15,39 +15,42 @@ Esta arquitectura combina una estructura **Feature-First** con cuatro patrones d
 
 ---
 
-## 2. Command / Queue Pattern (Cola de Comandos)
-* **Ubicación:** `src/features/ouija-board/hooks/usePlanchetteAnimation.ts`
-* **Problema que resuelve:** Una respuesta como `"NO FUI YO"` no puede mostrarse de golpe; debe ejecutarse como una secuencia temporal de desplazamientos físicos de la plancheta por el tablero.
+## 2. Custom Hook de Simulación (reemplaza a la Cola de Comandos)
+* **Ubicación:** `src/features/ouija-board/hooks/usePlanchetteSimulation.ts`
+* **Problema que resuelve:** El texto no debe aparecer de golpe ni deletrearse letra por letra; la plancheta tiene que "trabajar" sobre el tablero durante unos segundos antes de que se revele el mensaje completo.
 * **Cómo funciona:**
-  * Cada carácter de la respuesta se transforma en un comando de movimiento con coordenadas destino `(x, y)` extraídas del mapa del tablero (`coordinates.ts`).
-  * Los comandos se encolan y se ejecutan uno por uno mediante un temporizador controlado, iluminando la letra activa antes de pasar al siguiente comando de la cola.
+  * El hook expone `simulate(durationMs): Promise<void>` y `cancel()`. Mientras corre, mueve la plancheta por puntos aleatorios dentro del tablero con un movimiento errático; no depende del contenido del texto.
+  * Se usa dos veces por turno: al enviar el reclamo (el mensaje del humano aparece **abajo** al terminar) y al recibir el veredicto (la respuesta del fantasma aparece **arriba** al terminar).
+  * La interfaz guarda solo `lastHumanMessage` y `lastGhostAnswer`; no hay historial y cada valor nuevo reemplaza al anterior.
+  * Ya no hace falta el mapa de coordenadas por letra (`coordinates.ts`): el tablero es decorativo y solo se necesita la posición de la casilla **ADIÓS** para el exorcismo.
 
 ---
 
 ## 3. State Pattern (Máquina de Estados Finitos)
 * **Ubicación:** `src/app/App.tsx`
-* **Problema que resuelve:** Evita estados inconsistentes o bugs visuales (por ejemplo, que el usuario envíe una nueva pregunta mientras la plancheta todavía está deletreando la anterior o después de haber exorcizado al fantasma).
+* **Problema que resuelve:** Evita estados inconsistentes o bugs visuales (por ejemplo, que el usuario envíe una nueva pregunta mientras la plancheta todavía está en plena simulación o después de haber exorcizado al fantasma).
 * **Cómo funciona:**
-  * La aplicación opera bajo cuatro estados explícitos y excluyentes:
+  * La aplicación opera bajo cinco estados explícitos y excluyentes:
     1. `IDLE`: Esperando el reclamo del humano.
-    2. `SUMMONING`: Consultando al oráculo (IA o local).
-    3. `SPELLING`: La plancheta está en movimiento deletreando la respuesta.
-    4. `EXORCISED`: Estado terminal activado por el botón de emergencia; bloquea nuevos reclamos hasta reiniciar la sesión.
+    2. `WRITING`: Simulación del reclamo; al terminar, el mensaje del humano aparece abajo.
+    3. `SUMMONING`: Consultando al oráculo (IA o local).
+    4. `MANIFESTING`: Simulación del veredicto; al terminar, la respuesta del fantasma aparece arriba y se vuelve a `IDLE`.
+    5. `EXORCISED`: Estado terminal activado por el botón de emergencia; bloquea nuevos reclamos hasta reiniciar la sesión.
 
 ---
 
 ## 4. Facade Pattern (Patrón Fachada)
 * **Ubicación:** `src/features/spirit-oracle/oracleService.ts`
-* **Problema que resuelve:** La interfaz de usuario no debería saber cómo se valida una API Key, cómo se formatea el prompt, cómo se eliminan acentos/caracteres no soportados por el tablero Ouija ni cómo se maneja el fallback.
+* **Problema que resuelve:** La interfaz de usuario no debería saber cómo se valida una API Key, cómo se formatea el prompt, cómo se limpia y recorta la respuesta ni cómo se maneja el fallback.
 * **Cómo funciona:**
   * Expone una única función limpia hacia los componentes: `consultGhost(question: string, apiKey?: string)`.
-  * Por dentro encapsula toda la orquestación: elige la estrategia, captura excepciones, normaliza el texto resultante (mayúsculas, sin tildes, longitud máxima) y entrega un string listo para que el tablero lo anime.
+  * Por dentro encapsula toda la orquestación: elige la estrategia, captura excepciones, normaliza el texto resultante (mayúsculas, longitud máxima; las tildes y la Ñ se conservan porque el texto ya no se deletrea sobre el tablero) y entrega un string listo para mostrarse arriba.
 
 ---
 
 ## Resumen de Flujo entre Patrones
 
-1. La UI envía la pregunta a la **Fachada** (`oracleService`).
-2. La **Fachada** delega la generación en la **Estrategia** activa (`AI` o `Local`) y sanitiza el texto.
-3. La **Máquina de Estados** pasa a `SPELLING` y entrega el texto a la **Cola de Comandos** (`usePlanchetteAnimation`).
-4. Si el usuario presiona el botón de pánico, la **Máquina de Estados** transiciona a `EXORCISED`, vacía la cola y envía la plancheta directo a `"ADIÓS"`.
+1. El humano envía su reclamo: la **Máquina de Estados** pasa a `WRITING`, corre la **Simulación** (`usePlanchetteSimulation`) y el mensaje aparece abajo, reemplazando al anterior.
+2. En `SUMMONING`, la UI envía la pregunta a la **Fachada** (`oracleService`), que delega la generación en la **Estrategia** activa (`AI` o `Local`) y normaliza el texto.
+3. La **Máquina de Estados** pasa a `MANIFESTING`, corre otra **Simulación** y la respuesta aparece arriba, reemplazando a la anterior.
+4. Si el usuario presiona el botón de pánico, la **Máquina de Estados** transiciona a `EXORCISED`, cancela la simulación y la consulta en curso, y envía la plancheta directo a la casilla **ADIÓS**.
