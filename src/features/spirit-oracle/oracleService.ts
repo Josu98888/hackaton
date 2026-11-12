@@ -20,7 +20,8 @@ export async function consultGhost(question: string, apiKey?: string): Promise<s
   let answer: string
   try {
     answer = await strategy.askSpirit(question)
-  } catch {
+  } catch (err) {
+    console.warn('[oracle] AI failed, falling back to local:', err)
     answer = await new LocalOracleStrategy().askSpirit(question)
   }
   const normalized = normalizeForBoard(answer)

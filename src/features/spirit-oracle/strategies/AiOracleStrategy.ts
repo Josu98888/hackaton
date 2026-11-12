@@ -16,7 +16,7 @@ export class AiOracleStrategy implements SpiritResponseStrategy {
 
   private async gemini(question: string): Promise<string> {
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(this.apiKey)}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${encodeURIComponent(this.apiKey)}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -26,7 +26,7 @@ export class AiOracleStrategy implements SpiritResponseStrategy {
         }),
       },
     )
-    if (!res.ok) throw new Error(`Gemini ${res.status}`)
+    if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`)
     const data = await res.json()
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text
     if (!text) throw new Error('Respuesta vacia')
@@ -45,7 +45,7 @@ export class AiOracleStrategy implements SpiritResponseStrategy {
         ],
       }),
     })
-    if (!res.ok) throw new Error(`Groq ${res.status}`)
+    if (!res.ok) throw new Error(`Groq ${res.status}: ${await res.text()}`)
     const data = await res.json()
     const text = data?.choices?.[0]?.message?.content
     if (!text) throw new Error('Respuesta vacia')
