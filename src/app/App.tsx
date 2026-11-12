@@ -31,6 +31,7 @@ const STATUS: Record<State, string> = {
   EXORCISED: 'Sesión exorcizada.',
 }
 
+const MAX_CLAIM_LENGTH = 100
 const D = 2000
 const MANIFEST_DELAY = 900
 const NBSP = ' '
@@ -53,7 +54,7 @@ export default function App() {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault()
-    const text = question.trim()
+    const text = question.trim().slice(0, MAX_CLAIM_LENGTH)
     if (state !== 'IDLE' || !text) return
     const id = ++turn.current
     const alive = () => turn.current === id
@@ -140,12 +141,19 @@ export default function App() {
           <input
             id="claim"
             type="text"
-            maxLength={140}
+            maxLength={MAX_CLAIM_LENGTH}
             placeholder="¿Quién cortó el Wi-Fi anoche?"
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            onChange={(e) => setQuestion(e.target.value.slice(0, MAX_CLAIM_LENGTH))}
             disabled={busy}
+            aria-describedby="claim-counter"
           />
+          <span
+            id="claim-counter"
+            className={`counter${question.length >= MAX_CLAIM_LENGTH ? ' full' : ''}`}
+          >
+            {question.length}/{MAX_CLAIM_LENGTH}
+          </span>
         </div>
         <button type="submit" className="primary" disabled={busy}>
           Invocar Respuesta

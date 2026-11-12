@@ -22,7 +22,9 @@ input::placeholder { color: #c9b68a; opacity: 0.8; }
 .status { margin: 0; text-align: center; font-style: italic; font-size: 17px; }
 .form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
 .field { flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px; }
-.field label { color: #c9b68a; font-size: 16px; }
+.field label { color: #f0dcae; font-size: 19px; font-weight: 600; }
+.counter { align-self: flex-end; font-size: 14px; font-style: italic; color: #c9b68a; }
+.counter.full { color: #e0736b; }
 button { min-height: 48px; padding: 0 20px; border-radius: 8px; font-family: Rye, serif; font-size: 16px; cursor: pointer; }
 .primary { background: #e6cf9c; color: #2a1a0c; border: 1px solid #e6cf9c; }
 .danger { background: #a3221b; color: #fff; border: 1px solid #e0736b; }
@@ -32,6 +34,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid #f0dcae; outline-
 .notice p { margin: 0; color: #f0dcae; }
 @media (max-width: 640px) {
   .head, .form, .notice { flex-direction: column; align-items: stretch; }
+  .form { gap: 10px; }
+  .field { flex: none; }
   .keybox { max-width: none; }
   button { width: 100%; }
 }
