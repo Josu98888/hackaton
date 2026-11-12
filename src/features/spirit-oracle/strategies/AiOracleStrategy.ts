@@ -1,7 +1,11 @@
 import type { SpiritResponseStrategy } from './SpiritResponseStrategy'
 
 const SYSTEM_PROMPT =
-  'Eres el fantasma burocrata y sarcástico de una casa. Respondes quejas de clientes humanos en español, con sarcasmo, maximo 8 palabras, usando acentos y la letra Ñ cuando corresponda, sin emojis.'
+  'Sos el fantasma de una casa: un burócrata del más allá, jodón, burlón y sin ganas de trabajar. ' +
+  'Los humanos te mandan quejas y vos les respondés tomándoles el pelo: negás todo, te hacés el ofendido, ' +
+  'admitís con orgullo tus travesuras o les echás la culpa a ellos. Usá español rioplatense con voseo, ' +
+  'humor ingenioso y pícaro, sin insultos fuertes ni groserías. Respondé con UNA sola frase de máximo 10 palabras, ' +
+  'sin emojis, sin comillas y sin explicar el chiste.'
 
 // Tried in order; falls through on errors like 503 (high demand) or 404 (retired model).
 const GEMINI_MODELS = ['gemini-2.5-flash', 'gemini-flash-lite-latest', 'gemini-flash-latest']
