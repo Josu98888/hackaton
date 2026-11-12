@@ -2,6 +2,9 @@ import { useEffect, useReducer, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { consultGhost } from '../features/spirit-oracle/oracleService'
 import { OuijaBoard } from '../features/ouija-board/components/OuijaBoard'
+import { FlyingGhosts } from '../features/ambient/FlyingGhosts'
+import { MuteButton } from '../features/sound/MuteButton'
+import { fadeOut, isMuted, play, setMuted, stopAll } from '../features/sound/soundManager'
 import { GOODBYE, REST, usePlanchetteSimulation } from '../features/ouija-board/hooks/usePlanchetteSimulation'
 
 type State = 'IDLE' | 'WRITING' | 'SUMMONING' | 'MANIFESTING' | 'EXORCISED'
@@ -42,6 +45,8 @@ export default function App() {
   const [question, setQuestion] = useState('')
   const [humanMessage, setHumanMessage] = useState('')
   const [ghostAnswer, setGhostAnswer] = useState('')
+  const [muted, setMutedState] = useState(isMuted)
+  const interacted = useRef(false)
   const turn = useRef(0)
   const timers = useRef<number[]>([])
   const sim = usePlanchetteSimulation()
@@ -59,12 +64,15 @@ export default function App() {
     const id = ++turn.current
     const alive = () => turn.current === id
     dispatch({ type: 'SUBMIT' })
+    interacted.current = true
+    play('susurro')
     setQuestion('')
     clearTimers()
     timers.current.push(
       window.setTimeout(() => {
         if (!alive()) return
         setHumanMessage(text)
+        play('pluma')
         dispatch({ type: 'SUMMON' })
       }, D),
       window.setTimeout(() => {
@@ -76,6 +84,8 @@ export default function App() {
     if (!alive()) return
     clearTimers()
     setGhostAnswer(answer)
+    fadeOut('susurro')
+    play('veredicto')
     dispatch({ type: 'DONE' })
   }
 
@@ -84,6 +94,9 @@ export default function App() {
     turn.current++
     clearTimers()
     sim.cancel(GOODBYE)
+    stopAll()
+    interacted.current = true
+    play('muajaja')
     setGhostAnswer('ADIÓS')
     dispatch({ type: 'EXORCISE' })
   }
@@ -92,21 +105,34 @@ export default function App() {
     turn.current++
     clearTimers()
     sim.cancel(REST)
+    stopAll()
     setQuestion('')
     setHumanMessage('')
     setGhostAnswer('')
     dispatch({ type: 'RESET' })
   }
 
+  const toggleMute = () => {
+    const next = !muted
+    setMuted(next)
+    setMutedState(next)
+  }
+  const onGhostCross = () => {
+    if (interacted.current && !muted && state !== 'EXORCISED') play('uuuh')
+  }
+
   const busy = state !== 'IDLE'
 
   return (
     <main className="app">
+      {state !== 'EXORCISED' && <FlyingGhosts onCross={onGhostCross} />}
       <header className="head">
         <div>
           <p className="eyebrow">HACKATÓN INTEGRAR</p>
           <h1>Libro de Quejas Espectral</h1>
         </div>
+        <div className="head-side">
+        <MuteButton muted={muted} onToggle={toggleMute} />
         <div className="keybox">
           <label htmlFor="apikey" className="key-label">Abrí el Inframundo con tu API Key</label>
           <input
@@ -118,6 +144,7 @@ export default function App() {
             onChange={(e) => setApiKey(e.target.value)}
           />
           <p className="help">Dejala para conversar con el fantasma más cercano. Sin clave, atiende el de guardia.</p>
+        </div>
         </div>
       </header>
 
