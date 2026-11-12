@@ -1,0 +1,21 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #0b0710; color: #e8dcc0; font-family: Georgia, serif; }
+.app { max-width: 760px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+h1 { text-align: center; color: #d4af37; letter-spacing: 2px; text-shadow: 0 0 12px #7a1fa2; margin: 0; }
+input, textarea { background: #1a1220; color: #e8dcc0; border: 1px solid #5a4a2a; border-radius: 6px; padding: 10px; font: inherit; width: 100%; }
+textarea { resize: vertical; }
+.board { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 16px; border: 6px solid #2b1a0c;
+  background: radial-gradient(ellipse at center, #5a3a1e 0%, #3a2312 70%, #1f1208 100%); box-shadow: 0 0 40px #000 inset, 0 0 30px #4b1a6b; overflow: hidden; }
+.glyph { position: absolute; transform: translate(-50%, -50%); color: #d4af37; font-size: clamp(12px, 3vw, 24px); font-weight: bold; transition: all .2s; text-shadow: 0 0 4px #000; }
+.glyph.word { font-size: clamp(14px, 3.4vw, 28px); letter-spacing: 2px; }
+.glyph.active { color: #fff; transform: translate(-50%, -50%) scale(1.5); text-shadow: 0 0 14px #ffd700, 0 0 24px #ff9; }
+.planchette { position: absolute; width: 11%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: rgba(20, 10, 30, .55); border: 3px solid #d4af37; box-shadow: 0 4px 14px #000; transition: left .5s ease-in-out, top .5s ease-in-out; pointer-events: none;
+  display: flex; align-items: center; justify-content: center; }
+.planchette-eye { width: 30%; aspect-ratio: 1; border-radius: 50%; background: rgba(255, 255, 255, .25); box-shadow: 0 0 10px #fff; }
+.spelled { text-align: center; font-size: 1.6rem; letter-spacing: 4px; color: #d4af37; min-height: 2rem; margin: 0; }
+.status { text-align: center; margin: 0; font-style: italic; opacity: .8; }
+.buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+button { flex: 1; padding: 12px; border: 1px solid #d4af37; background: #2b1a0c; color: #d4af37; font: inherit; font-weight: bold; border-radius: 6px; cursor: pointer; }
+button:disabled { opacity: .4; cursor: not-allowed; }
+button.danger { background: #b00020; color: #fff; border-color: #ff5a6e; box-shadow: 0 0 14px #b00020; }
