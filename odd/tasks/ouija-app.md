@@ -23,3 +23,9 @@ Route: delegated direct (writer trigger). Branch rebased onto main.
 - [x] T11 Mute button in header with aria-label, persisted in localStorage
 - [x] T12 Three flying ghosts (inline fantasma.svg), hidden on reduced-motion and EXORCISED
 - [x] T13 `pnpm build` green, commit
+
+## Medium diploma (docs/diseno/diploma.md, main 3b66aec)
+Route: delegated direct (writer trigger). Branch feat/diploma.
+- [x] T14 Diploma modal: inline diploma.svg, dynamic claims count/date/acta, 1.5s delay after exorcise, Escape closes
+- [x] T15 Guardar diploma (print only the diploma) + Reiniciar sesión, dialog a11y + focus trap, reduced-motion
+- [x] T16 `pnpm build` green, commit

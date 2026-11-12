@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { consultGhost } from '../features/spirit-oracle/oracleService'
 import { OuijaBoard } from '../features/ouija-board/components/OuijaBoard'
 import { FlyingGhosts } from '../features/ambient/FlyingGhosts'
+import { DiplomaModal } from '../features/diploma/DiplomaModal'
 import { MuteButton } from '../features/sound/MuteButton'
 import { fadeOut, isMuted, play, setMuted, stopAll } from '../features/sound/soundManager'
 import { GOODBYE, REST, usePlanchetteSimulation } from '../features/ouija-board/hooks/usePlanchetteSimulation'
@@ -46,6 +47,9 @@ export default function App() {
   const [humanMessage, setHumanMessage] = useState('')
   const [ghostAnswer, setGhostAnswer] = useState('')
   const [muted, setMutedState] = useState(isMuted)
+  const [claimCount, setClaimCount] = useState(0)
+  const [diplomaOpen, setDiplomaOpen] = useState(false)
+  const diplomaTimer = useRef<number | null>(null)
   const interacted = useRef(false)
   const turn = useRef(0)
   const timers = useRef<number[]>([])
@@ -55,7 +59,11 @@ export default function App() {
     timers.current.forEach((t) => window.clearTimeout(t))
     timers.current = []
   }
-  useEffect(() => clearTimers, [])
+  const clearDiplomaTimer = () => {
+    if (diplomaTimer.current !== null) window.clearTimeout(diplomaTimer.current)
+    diplomaTimer.current = null
+  }
+  useEffect(() => () => { clearTimers(); clearDiplomaTimer() }, [])
 
   const submit = async (e: FormEvent) => {
     e.preventDefault()
@@ -64,6 +72,7 @@ export default function App() {
     const id = ++turn.current
     const alive = () => turn.current === id
     dispatch({ type: 'SUBMIT' })
+    setClaimCount((n) => n + 1)
     interacted.current = true
     play('susurro')
     setQuestion('')
@@ -99,6 +108,8 @@ export default function App() {
     play('muajaja')
     setGhostAnswer('ADIÓS')
     dispatch({ type: 'EXORCISE' })
+    clearDiplomaTimer()
+    diplomaTimer.current = window.setTimeout(() => setDiplomaOpen(true), 1500)
   }
 
   const restart = () => {
@@ -109,6 +120,9 @@ export default function App() {
     setQuestion('')
     setHumanMessage('')
     setGhostAnswer('')
+    setClaimCount(0)
+    clearDiplomaTimer()
+    setDiplomaOpen(false)
     dispatch({ type: 'RESET' })
   }
 
@@ -197,6 +211,9 @@ export default function App() {
             Reiniciar sesión
           </button>
         </div>
+      )}
+      {diplomaOpen && state === 'EXORCISED' && (
+        <DiplomaModal claimCount={claimCount} onClose={() => setDiplomaOpen(false)} onRestart={restart} />
       )}
     </main>
   )
