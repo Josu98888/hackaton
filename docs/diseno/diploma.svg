@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-labelledby="diploma-titulo">
+<title id="diploma-titulo">Diploma de Médium</title>
+<rect x="10" y="10" width="780" height="480" rx="16" fill="#c9a06a" stroke="#2a1a0c" stroke-width="5"></rect>
+<path d="M100 60 H700 A40 40 0 0 0 740 100 V430 A40 40 0 0 0 700 470 H100 A40 40 0 0 0 60 430 V100 A40 40 0 0 0 100 60 Z" fill="#f3e0b8" stroke="#2a1a0c" stroke-width="5" stroke-linejoin="round"></path>
+<rect x="190" y="92" width="420" height="62" rx="31" fill="none" stroke="#2a1a0c" stroke-width="4"></rect>
+<text x="400" y="134" text-anchor="middle" font-family="Rye, serif" font-size="30" textLength="350" lengthAdjust="spacingAndGlyphs" fill="#2a1a0c">DIPLOMA DE MÉDIUM</text>
+<text x="400" y="192" text-anchor="middle" font-family="Spectral, Georgia, serif" font-style="italic" font-size="18" fill="#2a1a0c">Se certifica que</text>
+<text id="diploma-nombre" x="400" y="230" text-anchor="middle" font-family="Rye, serif" font-size="26" fill="#2a1a0c">el Humano de esta Casa</text>
+<line x1="220" y1="243" x2="580" y2="243" stroke="#2a1a0c" stroke-width="2" stroke-linecap="round"></line>
+<text x="400" y="278" text-anchor="middle" font-family="Spectral, Georgia, serif" font-size="18" fill="#2a1a0c">exorcizó con éxito a su fantasma doméstico</text>
+<text id="diploma-reclamos" x="400" y="304" text-anchor="middle" font-family="Spectral, Georgia, serif" font-size="18" fill="#2a1a0c">tras presentar 3 reclamos</text>
+<text x="400" y="330" text-anchor="middle" font-family="Spectral, Georgia, serif" font-size="18" fill="#2a1a0c">y queda habilitado para discutir con el más allá.</text>
+<text x="112" y="388" font-family="Spectral, Georgia, serif" font-size="14" fill="#2a1a0c">Dado el <tspan id="diploma-fecha">12/11/2026</tspan> · Acta N.º <tspan id="diploma-acta">666-0000</tspan></text>
+<line x1="112" y1="424" x2="360" y2="424" stroke="#2a1a0c" stroke-width="2" stroke-linecap="round"></line>
+<text x="112" y="446" font-family="Spectral, Georgia, serif" font-style="italic" font-size="15" fill="#2a1a0c">El Fantasma (firma bajo protesta)</text>
+<g aria-hidden="true">
+<path d="M584 445 L556 546 L581 527 L600 549 L624 452 Z" fill="#8a1d17" stroke="#2a1a0c" stroke-width="4" stroke-linejoin="round"></path>
+<path d="M600 452 L624 549 L643 527 L668 546 L640 445 Z" fill="#8a1d17" stroke="#2a1a0c" stroke-width="4" stroke-linejoin="round"></path>
+<polygon points="684.0,398.0 671.1,408.4 679.7,422.6 664.0,428.0 667.2,444.3 650.6,444.0 648.0,460.4 632.5,454.4 624.5,468.9 612.0,458.0 599.5,468.9 591.5,454.4 576.0,460.4 573.4,444.0 556.8,444.3 560.0,428.0 544.3,422.6 552.9,408.4 540.0,398.0 552.9,387.6 544.3,373.4 560.0,368.0 556.8,351.7 573.4,352.0 576.0,335.6 591.5,341.6 599.5,327.1 612.0,338.0 624.5,327.1 632.5,341.6 648.0,335.6 650.6,352.0 667.2,351.7 664.0,368.0 679.7,373.4 671.1,387.6" fill="#a3221b" stroke="#2a1a0c" stroke-width="4" stroke-linejoin="round"></polygon>
+<circle cx="612" cy="398" r="48" fill="#a3221b" stroke="#2a1a0c" stroke-width="3"></circle>
+<circle cx="612" cy="398" r="41" fill="none" stroke="#f0dcae" stroke-width="2"></circle>
+<g transform="translate(597 368) scale(0.84)">
+<path d="M0 40 V18 a18 18 0 0 1 36 0 V40 l-6 -6 l-6 6 l-6 -6 l-6 6 l-6 -6 z" fill="#f0dcae" stroke="#2a1a0c" stroke-width="2" stroke-linejoin="round"></path>
+<circle cx="12" cy="17" r="2.6" fill="#2a1a0c"></circle><circle cx="24" cy="17" r="2.6" fill="#2a1a0c"></circle><ellipse cx="18" cy="26" rx="3" ry="4" fill="#2a1a0c"></ellipse>
+</g>
+<text x="612" y="422" text-anchor="middle" font-family="Spectral, Georgia, serif" font-weight="600" font-size="10" letter-spacing="1.5" fill="#f0dcae">APROBADO</text>
+</g>
+</svg>
