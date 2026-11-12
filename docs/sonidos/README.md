@@ -1,15 +1,17 @@
 # Sonidos – Libro de Quejas Espectral
 
-Guía de sonido de la app. Esta carpeta no incluye los archivos de audio: hay que conseguirlos con licencia libre (ver [Fuentes](#fuentes-y-licencias)) y guardarlos con los nombres indicados.
+Guía de sonido de la app. Los cinco audios ya están en [`public/sounds/`](../../public/sounds), listos para usar desde la app como `/sounds/<archivo>.mp3`.
 
 ## Lista de sonidos
-| Momento | Sonido | Archivo sugerido | Duración | Volumen |
+| Momento | Sonido | Archivo | Duración | Volumen |
 | --- | --- | --- | --- | --- |
-| Empieza la simulación (`WRITING` y `MANIFESTING`) | Susurro o viento fantasmal, en loop | `public/sounds/susurro.mp3` | 3–5 s, loop | 0.25 |
-| Aparece el reclamo del humano abajo | Rasguido de pluma sobre papel | `public/sounds/pluma.mp3` | menos de 1 s | 0.4 |
-| Aparece la respuesta del fantasma arriba | Campanada grave o golpe seco de madera | `public/sounds/veredicto.mp3` | 1 s | 0.5 |
-| Botón **¡EXORCIZAR!** | Risa "muajaja" que se va apagando | `public/sounds/muajaja.mp3` | 2–3 s | 0.7 |
-| Pasa el fantasma volador (opcional) | "Uuuh" suave | `public/sounds/uuuh.mp3` | 1–2 s | 0.15 |
+| Empieza la simulación (`WRITING` y `MANIFESTING`) | Viento fantasmal, en loop | `public/sounds/susurro.mp3` | 4 s, loop | 0.25 |
+| Aparece el reclamo del humano abajo | Rasguido de pluma sobre papel | `public/sounds/pluma.mp3` | 0,7 s | 0.4 |
+| Aparece la respuesta del fantasma arriba | Golpe de madera con campanada grave | `public/sounds/veredicto.mp3` | 1,4 s | 0.5 |
+| Botón **¡EXORCIZAR!** | Risa "muajaja" que se va apagando | `public/sounds/muajaja.mp3` | 3,8 s | 0.7 |
+| Pasa un fantasma volador (opcional) | "Uuuh" suave | `public/sounds/uuuh.mp3` | 3 s | 0.15 |
+
+Todos son MP3 mono de menos de 50 KB. El `susurro` está armado para repetirse sin corte; si el MP3 deja un silencio mínimo entre vueltas, superponer dos reproducciones con un fundido corto.
 
 ## Cuándo suena cada uno
 1. **Enviar reclamo** → arranca `susurro` en loop junto con la plancheta.
@@ -29,16 +31,18 @@ Guía de sonido de la app. Esta carpeta no incluye los archivos de audio: hay qu
 - **`prefers-reduced-motion`:** no afecta al sonido; el control es el botón de silenciar.
 
 ## Fuentes y licencias
-Usar sonidos con licencia libre y anotar acá el origen de cada uno:
+Los cinco audios incluidos fueron generados por síntesis para este proyecto (ruido filtrado, tonos y una voz sintética), sin usar grabaciones de terceros, así que no requieren atribución.
+
+| Archivo | Origen |
+| --- | --- |
+| `susurro.mp3` | Síntesis propia |
+| `pluma.mp3` | Síntesis propia |
+| `veredicto.mp3` | Síntesis propia |
+| `muajaja.mp3` | Síntesis propia (voz sintética, suena robótica) |
+| `uuuh.mp3` | Síntesis propia (voz sintética) |
+
+Si se reemplaza alguno por una grabación, usar sonidos con licencia libre y anotar el origen en la tabla:
 
 - [Freesound](https://freesound.org): revisar la licencia de cada sonido (CC0 no pide atribución; CC BY sí).
 - [Pixabay – efectos de sonido](https://pixabay.com/sound-effects/): uso libre según su licencia.
-- Grabación propia: el "muajaja" puede grabarlo alguien del equipo.
-
-| Archivo | Origen | Licencia |
-| --- | --- | --- |
-| `susurro.mp3` | [COMPLETAR] | [COMPLETAR] |
-| `pluma.mp3` | [COMPLETAR] | [COMPLETAR] |
-| `veredicto.mp3` | [COMPLETAR] | [COMPLETAR] |
-| `muajaja.mp3` | [COMPLETAR] | [COMPLETAR] |
-| `uuuh.mp3` | [COMPLETAR] | [COMPLETAR] |
+- Grabación propia: el "muajaja" puede grabarlo alguien del equipo con el celular.
