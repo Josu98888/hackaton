@@ -27,3 +27,4 @@ Una tabla Ouija invertida en espíritu donde el humano ingresa su queja y el fan
 
 ## Documentación
 - [Patrones de diseño](docs/patrones-de-diseno.md)
+- [Diseño final de la pantalla](docs/diseno/README.md)

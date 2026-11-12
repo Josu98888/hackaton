@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Tablero espectral Hackatón Integrar con SÍ, NO, abecedario, números y ADIÓS">
+<defs>
+<radialGradient id="pergamino" cx="50%" cy="48%" r="75%">
+<stop offset="0%" stop-color="#f0dcae"></stop>
+<stop offset="60%" stop-color="#e2c98f"></stop>
+<stop offset="100%" stop-color="#b8935a"></stop>
+</radialGradient>
+</defs>
+<rect x="0" y="0" width="1200" height="800" rx="14" fill="url(#pergamino)"></rect>
+<rect x="14" y="14" width="1172" height="772" rx="8" fill="none" stroke="#2a1a0c" stroke-width="3"></rect>
+<rect x="24" y="24" width="1152" height="752" rx="5" fill="none" stroke="#2a1a0c" stroke-width="1"></rect>
+<g aria-hidden="true">
+<circle cx="105" cy="105" r="33" fill="none" stroke="#2a1a0c" stroke-width="4"></circle>
+<circle cx="105" cy="105" r="22" fill="#2a1a0c"></circle>
+<line x1="147.0" y1="105.0" x2="167.0" y2="105.0" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="143.8" y1="121.1" x2="154.9" y2="125.7" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="134.7" y1="134.7" x2="148.8" y2="148.8" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="121.1" y1="143.8" x2="125.7" y2="154.9" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="105.0" y1="147.0" x2="105.0" y2="167.0" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="88.9" y1="143.8" x2="84.3" y2="154.9" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="75.3" y1="134.7" x2="61.2" y2="148.8" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="66.2" y1="121.1" x2="55.1" y2="125.7" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="63.0" y1="105.0" x2="43.0" y2="105.0" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="66.2" y1="88.9" x2="55.1" y2="84.3" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="75.3" y1="75.3" x2="61.2" y2="61.2" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="88.9" y1="66.2" x2="84.3" y2="55.1" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="105.0" y1="63.0" x2="105.0" y2="43.0" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="121.1" y1="66.2" x2="125.7" y2="55.1" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="134.7" y1="75.3" x2="148.8" y2="61.2" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+<line x1="143.8" y1="88.9" x2="154.9" y2="84.3" stroke="#2a1a0c" stroke-width="4" stroke-linecap="round"></line>
+</g>
+<g aria-hidden="true" transform="translate(1095 105)">
+<path d="M 6 -44 A 44 44 0 1 0 6 44 A 34 34 0 1 1 6 -44 Z" fill="#2a1a0c"></path>
+<path d="M -52 -40 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z" fill="#2a1a0c"></path>
+<path d="M 30 30 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z" fill="#2a1a0c"></path>
+</g>
+<text x="250" y="152" text-anchor="middle" font-family="Rye, serif" font-size="54" fill="#2a1a0c">SÍ</text>
+<text x="950" y="152" text-anchor="middle" font-family="Rye, serif" font-size="54" fill="#2a1a0c">NO</text>
+<text x="600" y="112" text-anchor="middle" font-family="Rye, serif" font-size="46" textLength="520" lengthAdjust="spacingAndGlyphs" fill="#2a1a0c">HACKATÓN INTEGRAR</text>
+<line x1="372" y1="143" x2="440" y2="143" stroke="#2a1a0c" stroke-width="2"></line>
+<line x1="760" y1="143" x2="828" y2="143" stroke="#2a1a0c" stroke-width="2"></line>
+<text x="600" y="150" text-anchor="middle" font-family="Spectral, Georgia, serif" font-weight="600" font-size="20" textLength="290" lengthAdjust="spacing" fill="#2a1a0c">ORÁCULO ESPECTRAL</text>
+<text x="600" y="186" text-anchor="middle" font-family="Spectral, Georgia, serif" font-style="italic" font-size="19" fill="#2a1a0c">Los espíritus de esta casa atienden reclamos</text>
+<text x="132.3" y="449.4" transform="rotate(-24.0 132.3 449.4)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">A</text>
+<text x="206.7" y="419.4" transform="rotate(-20.0 206.7 419.4)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">B</text>
+<text x="283.0" y="394.5" transform="rotate(-16.0 283.0 394.5)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">C</text>
+<text x="360.9" y="375.1" transform="rotate(-12.0 360.9 375.1)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">D</text>
+<text x="440.0" y="361.2" transform="rotate(-8.0 440.0 361.2)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">E</text>
+<text x="519.8" y="352.8" transform="rotate(-4.0 519.8 352.8)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">F</text>
+<text x="600.0" y="350.0" transform="rotate(0.0 600.0 350.0)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">G</text>
+<text x="680.2" y="352.8" transform="rotate(4.0 680.2 352.8)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">H</text>
+<text x="760.0" y="361.2" transform="rotate(8.0 760.0 361.2)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">I</text>
+<text x="839.1" y="375.1" transform="rotate(12.0 839.1 375.1)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">J</text>
+<text x="917.0" y="394.5" transform="rotate(16.0 917.0 394.5)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">K</text>
+<text x="993.3" y="419.4" transform="rotate(20.0 993.3 419.4)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">L</text>
+<text x="1067.7" y="449.4" transform="rotate(24.0 1067.7 449.4)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">M</text>
+<text x="136.9" y="591.2" transform="rotate(-27.0 136.9 591.2)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">N</text>
+<text x="209.7" y="557.6" transform="rotate(-22.5 209.7 557.6)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">O</text>
+<text x="284.8" y="529.9" transform="rotate(-18.0 284.8 529.9)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">P</text>
+<text x="361.9" y="508.2" transform="rotate(-13.5 361.9 508.2)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">Q</text>
+<text x="440.4" y="492.6" transform="rotate(-9.0 440.4 492.6)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">R</text>
+<text x="520.0" y="483.1" transform="rotate(-4.5 520.0 483.1)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">S</text>
+<text x="600.0" y="480.0" transform="rotate(0.0 600.0 480.0)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">T</text>
+<text x="680.0" y="483.1" transform="rotate(4.5 680.0 483.1)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">U</text>
+<text x="759.6" y="492.6" transform="rotate(9.0 759.6 492.6)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">V</text>
+<text x="838.1" y="508.2" transform="rotate(13.5 838.1 508.2)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">W</text>
+<text x="915.2" y="529.9" transform="rotate(18.0 915.2 529.9)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">X</text>
+<text x="990.3" y="557.6" transform="rotate(22.5 990.3 557.6)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">Y</text>
+<text x="1063.1" y="591.2" transform="rotate(27.0 1063.1 591.2)" text-anchor="middle" font-family="Rye, serif" font-size="70" fill="#2a1a0c">Z</text>
+<text x="600" y="668" text-anchor="middle" font-family="Rye, serif" font-size="50" textLength="520" lengthAdjust="spacing" fill="#2a1a0c">1234567890</text>
+<text x="600" y="752" text-anchor="middle" font-family="Rye, serif" font-size="56" textLength="300" lengthAdjust="spacing" fill="#2a1a0c">ADIÓS</text>
+<g aria-hidden="true" transform="translate(66 684) scale(1.7)"><path d="M0 40 V18 a18 18 0 0 1 36 0 V40 l-6 -6 l-6 6 l-6 -6 l-6 6 l-6 -6 z" fill="none" stroke="#2a1a0c" stroke-width="2.5" stroke-linejoin="round"></path><circle cx="12" cy="17" r="2.6" fill="#2a1a0c"></circle><circle cx="24" cy="17" r="2.6" fill="#2a1a0c"></circle><ellipse cx="18" cy="26" rx="3" ry="4" fill="#2a1a0c"></ellipse></g>
+<g aria-hidden="true" transform="translate(1073 684) scale(1.7)"><path d="M0 40 V18 a18 18 0 0 1 36 0 V40 l-6 -6 l-6 6 l-6 -6 l-6 6 l-6 -6 z" fill="none" stroke="#2a1a0c" stroke-width="2.5" stroke-linejoin="round"></path><circle cx="12" cy="17" r="2.6" fill="#2a1a0c"></circle><circle cx="24" cy="17" r="2.6" fill="#2a1a0c"></circle><ellipse cx="18" cy="26" rx="3" ry="4" fill="#2a1a0c"></ellipse></g>
+</svg>
